@@ -1,4 +1,3 @@
-arrownode.js
 createsvg();
 
 function createsvg () {
