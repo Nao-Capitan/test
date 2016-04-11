@@ -10,9 +10,10 @@ function createsvg () {
   // 指定を２つに
   var c1 = [100, 90, 30];
   var c2 = [200, 120, 20];
+  var c3 = [200, 310, 20];
 
   // 指定した値を配列にする
-  var carray = [c1, c2];
+  var carray = [c1, c2, c3];
 
   // dataに上で作成した配列を入れる
   var circle = svg.selectAll('circle').data(carray).enter().append('circle')
