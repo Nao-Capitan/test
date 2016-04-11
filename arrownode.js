@@ -1,3 +1,4 @@
+arrownode.js
 createsvg();
 
 function createsvg () {
@@ -11,15 +12,30 @@ function createsvg () {
   var c2 = [200, 120, 20];
   var carray = [c1, c2];
 
-  // 10種類の色を返す関数を使う
   var color = d3.scale.category10();
-  var circle = svg.selectAll('circle').data(carray).enter().append('circle')
+
+  var g = svg.selectAll('g')
+    .data(carray).enter().append('g')
     .attr({
-      'cx': function(d) { return d[0]; },
-      'cy': function(d) { return d[1]; },
+      // 座標設定を動的に行う
+      transform: function(d) {
+        return "translate(" + d[0] + "," + d[1] + ")";
+      },
+    });
+
+  // g.appendでデータ毎に要素を追加できる
+  g.append('circle')
+    .attr({
       'r': function(d) { return d[2]; },
-      // dはデータ要素そのもの、iはindex番号を返す
-      // color(i)で、n番目の色データを返す
       'fill': function(d,i) { return color(i); },
     });
+  g.append('text')
+    .attr({
+      // 真ん中若干下に配置されるように、文字色は白に。
+      'text-anchor': "middle",
+      'dy': ".35em",
+      'fill': "white",
+    })
+    // iは0から始まるので、+1しておく
+    .text(function(d,i) { return i+1; });
 };
